@@ -1,0 +1,8 @@
+flask
+google-api-python-client
+nltk
+wordcloud
+matplotlib
+numpy
+textblob
+gunicorn

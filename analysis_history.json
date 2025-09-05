@@ -1,0 +1,189 @@
+[
+  {
+    "id": "b01858b8",
+    "timestamp": "2025-09-05 16:30:25",
+    "video_url": "https://youtu.be/EiSZ5n_dsWA?si=9ntXkPNuffP8rUum",
+    "video_id": "EiSZ5n_dsWA",
+    "total_comments": 50,
+    "max_comments_requested": "50",
+    "sentiment_counts": {
+      "Negative": 4,
+      "Positive": 8,
+      "Neutral": 34
+    },
+    "wordcloud_file": "wordcloud_b01858b8.png",
+    "barchart_file": "bar_chart_b01858b8.png"
+  },
+  {
+    "id": "bcdefff9",
+    "timestamp": "2025-09-05 16:28:53",
+    "video_url": "https://youtu.be/6-UcGOWkhAM?si=SDGBUi7KeDja62jA",
+    "video_id": "6-UcGOWkhAM",
+    "total_comments": 81,
+    "max_comments_requested": "200",
+    "sentiment_counts": {
+      "Negative": 21,
+      "Neutral": 22,
+      "Positive": 38
+    },
+    "wordcloud_file": "wordcloud_bcdefff9.png",
+    "barchart_file": "bar_chart_bcdefff9.png"
+  },
+  {
+    "id": "f4b7d916",
+    "timestamp": "2025-09-05 16:27:47",
+    "video_url": "https://youtu.be/YbJOTdZBX1g?si=IbZQdbG9eLw_gcb4",
+    "video_id": "YbJOTdZBX1g",
+    "total_comments": 200,
+    "max_comments_requested": "200",
+    "sentiment_counts": {
+      "Neutral": 71,
+      "Positive": 36,
+      "Negative": 91
+    },
+    "wordcloud_file": "wordcloud_f4b7d916.png",
+    "barchart_file": "bar_chart_f4b7d916.png"
+  },
+  {
+    "id": "2e9b35d3",
+    "timestamp": "2025-09-04 19:50:11",
+    "video_url": "https://youtu.be/YbJOTdZBX1g?si=IbZQdbG9eLw_gcb4",
+    "video_id": "YbJOTdZBX1g",
+    "total_comments": 100,
+    "max_comments_requested": "100",
+    "sentiment_counts": {
+      "Negative": 48,
+      "Positive": 15,
+      "Neutral": 36
+    },
+    "wordcloud_file": "wordcloud_2e9b35d3.png",
+    "barchart_file": "bar_chart_2e9b35d3.png"
+  },
+  {
+    "id": "bff9a193",
+    "timestamp": "2025-09-04 19:45:54",
+    "video_url": "https://youtu.be/YbJOTdZBX1g?si=IbZQdbG9eLw_gcb4",
+    "video_id": "YbJOTdZBX1g",
+    "total_comments": 100,
+    "max_comments_requested": "100",
+    "sentiment_counts": {
+      "Negative": 48,
+      "Positive": 15,
+      "Neutral": 36
+    },
+    "wordcloud_file": "wordcloud_bff9a193.png",
+    "barchart_file": "bar_chart_bff9a193.png"
+  },
+  {
+    "id": "99024e96",
+    "timestamp": "2025-09-04 18:43:49",
+    "video_url": "https://youtu.be/wTKZBd3Dy98?si=_DYl4JVRmamqwaQo",
+    "video_id": "wTKZBd3Dy98",
+    "total_comments": 200,
+    "sentiment_counts": {
+      "Neutral": 102,
+      "Negative": 20,
+      "Positive": 55
+    },
+    "wordcloud_file": "wordcloud_99024e96.png",
+    "barchart_file": "bar_chart_99024e96.png"
+  },
+  {
+    "id": "cac1abe0",
+    "timestamp": "2025-09-04 18:41:55",
+    "video_url": "https://youtu.be/wTKZBd3Dy98?si=2M5j71ubD3WbFW4r",
+    "video_id": "wTKZBd3Dy98",
+    "total_comments": 200,
+    "sentiment_counts": {
+      "Neutral": 102,
+      "Negative": 20,
+      "Positive": 55
+    },
+    "wordcloud_file": "wordcloud_cac1abe0.png",
+    "barchart_file": "bar_chart_cac1abe0.png"
+  },
+  {
+    "id": "fbf6f956",
+    "timestamp": "2025-09-04 18:37:11",
+    "video_url": "https://youtu.be/6-UcGOWkhAM?si=SDGBUi7KeDja62jA",
+    "video_id": "6-UcGOWkhAM",
+    "total_comments": 84,
+    "sentiment_counts": {
+      "Negative": 21,
+      "Neutral": 23,
+      "Positive": 39
+    },
+    "wordcloud_file": "wordcloud_fbf6f956.png",
+    "barchart_file": "bar_chart_fbf6f956.png"
+  },
+  {
+    "id": "26149e64",
+    "timestamp": "2025-09-04 17:16:03",
+    "video_url": "https://youtu.be/wTKZBd3Dy98?si=2M5j71ubD3WbFW4r",
+    "video_id": "wTKZBd3Dy98",
+    "total_comments": 200,
+    "sentiment_counts": {
+      "Neutral": 102,
+      "Negative": 20,
+      "Positive": 55
+    },
+    "wordcloud_file": "wordcloud_26149e64.png",
+    "barchart_file": "bar_chart_26149e64.png"
+  },
+  {
+    "id": "0be9fa87",
+    "timestamp": "2025-09-04 16:55:49",
+    "video_url": "https://youtu.be/YbJOTdZBX1g?si=IbZQdbG9eLw_gcb4",
+    "video_id": "YbJOTdZBX1g",
+    "total_comments": 200,
+    "sentiment_counts": {
+      "Positive": 35,
+      "Neutral": 71,
+      "Negative": 88
+    },
+    "wordcloud_file": "wordcloud_0be9fa87.png",
+    "barchart_file": "bar_chart_0be9fa87.png"
+  },
+  {
+    "id": "3b608334",
+    "timestamp": "2025-09-03 21:34:25",
+    "video_url": "https://youtu.be/6-UcGOWkhAM?si=SDGBUi7KeDja62jA",
+    "video_id": "6-UcGOWkhAM",
+    "total_comments": 83,
+    "sentiment_counts": {
+      "Negative": 20,
+      "Neutral": 23,
+      "Positive": 39
+    },
+    "wordcloud_file": "wordcloud_3b608334.png",
+    "barchart_file": "bar_chart_3b608334.png"
+  },
+  {
+    "id": "f5b6fad2",
+    "timestamp": "2025-09-03 21:33:46",
+    "video_url": "https://youtu.be/wTKZBd3Dy98?si=2M5j71ubD3WbFW4r",
+    "video_id": "wTKZBd3Dy98",
+    "total_comments": 200,
+    "sentiment_counts": {
+      "Negative": 21,
+      "Neutral": 101,
+      "Positive": 55
+    },
+    "wordcloud_file": "wordcloud_f5b6fad2.png",
+    "barchart_file": "bar_chart_f5b6fad2.png"
+  },
+  {
+    "id": "9b25a243",
+    "timestamp": "2025-09-03 21:02:20",
+    "video_url": "https://youtu.be/7buyI4xQv-k?si=euVwQKYn28SfHsAE",
+    "video_id": "7buyI4xQv-k",
+    "total_comments": 100,
+    "sentiment_counts": {
+      "Neutral": 20,
+      "Positive": 13,
+      "Negative": 13
+    },
+    "wordcloud_file": "wordcloud_9b25a243.png",
+    "barchart_file": "bar_chart_9b25a243.png"
+  }
+]
