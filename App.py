@@ -3,6 +3,7 @@ from flask import Flask, render_template, request
 from collections import Counter
 import googleapiclient.discovery
 import nltk
+nltk.download("vader_lexicon", quiet=True)
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from wordcloud import WordCloud
 import matplotlib
