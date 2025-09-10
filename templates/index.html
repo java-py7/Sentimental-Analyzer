@@ -310,6 +310,186 @@
             display: block;
         }
 
+        .darklight-ModeToggle {
+            padding: 5px 11px;
+            border: none;
+            border-radius: 15px;
+            background: transparent;
+            color: #333;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 1.4rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .darklight-ModeToggle:hover {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+
+          /* =============== Dark Mode Toggle =============== */
+
+        body.dark {
+            background: #111;
+            color: #888;
+        }
+
+        body.dark .app-header {
+            background:  #000;
+            border: 1px solid blueviolet;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark .url-input {
+            background: #000;
+            border: 1px solid blueviolet;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark ::placeholder {
+            color: #888;
+        }
+
+        body.dark .comment-limit-select {
+            background: #000;
+            border: 1px solid blueviolet;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            color: #888;
+        }
+
+
+        body.dark .analyze-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #000;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        body.dark .tab-navigation {
+            background: #000;
+            border: 1px solid blueviolet;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark .tab-button {
+            color: #888;
+        }
+
+        body.dark .tab-button.active {
+            color: #111;
+        }
+
+         body.dark .results-container {
+            background: #000;
+            border: 1px solid blueviolet;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark .visualization-card {
+            background: #000;
+            border: 1px solid blueviolet;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark .card-title {
+            color: #888;
+        }
+
+        body.dark .sentiment-summary {
+            background: #000;
+            border: 1px solid blueviolet;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark .history-container {
+            background: #000;
+            border: 1px solid blueviolet;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark .clear-all-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #111;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark .history-entry {
+            background: #000;
+            border: 1px solid blueviolet;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+          body.dark .expand-icon {
+            border: 2px solid blueviolet;
+            color: blueviolet;
+        }
+
+         body.dark .history-entry.expanded .expand-icon {
+            background: blueviolet;
+            color: black;
+        }
+
+         body.dark .delete-btn {
+             background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #000;
+        }
+
+            body.dark .delete-btn:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        body.dark .detail-title {
+            color: #888;
+        }
+
+        body.dark .detail-label {
+            color: #888;
+        }
+
+        body.dark .detail-value {
+            color: #888;
+        }
+
+        body.dark .viz-preview {
+            background: #000;
+        }
+
+        body.dark .viz-title {
+            color: #888;
+        }
+
+          .comments-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #888;
+        }
+
+        body.dark .comment-item {
+            background: #000;
+            border: 1px solid blueviolet;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        body.dark .comment-text {
+            color: #888;
+        }
+
+        body.dark .h2-1 {
+            color: #888;
+        }
+
+        body.dark .comments-title {
+            color: #888;
+        }
+
+        body.dark .darklight-ModeToggle {
+            color: #888;
+        }
+
+
         /* =============== RESULTS STYLES =============== */
         .results-container {
             background: rgba(255, 255, 255, 0.95);
@@ -655,6 +835,13 @@
             font-weight: 600;
         }
 
+        .h2-1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
         /* =============== RESPONSIVE DESIGN  =============== */
         @media (max-width: 768px) {
             .main-container { padding: 10px; }
@@ -765,7 +952,7 @@
 
         {% if analyzed %}
         <div class="results-container">
-            <h2 style="font-size: 24px; font-weight: 600; margin-bottom: 25px; color: #333;">
+            <h2 class="h2-1">
                 <i class="fas fa-chart-line"></i> Analysis Results for:
                 <a href="{{ video_url }}" target="_blank" style="color: #667eea; text-decoration: none;">{{ video_url }}</a>
             </h2>
@@ -933,6 +1120,7 @@
     <button class="tab-button active" onclick="openTab('home')">
         <i class="fas fa-home"></i> Home
     </button>
+     <p onclick="toggleMode()" class="darklight-ModeToggle">☀</p>
     <button class="tab-button" onclick="openTab('history')">
         <i class="fas fa-history"></i> History
     </button>
@@ -1133,6 +1321,15 @@ function loadHistory() {
             console.error('Error loading history:', error);
         });
 }
+
+// =============== DARK LIGHT MODE ===============
+
+const b = document.body;
+function toggleMode() {
+  b.classList.toggle('dark');
+  m = b.classList.contains('dark') ? 'dark' : 'light';
+}
+
 </script>
 
 </body>
