@@ -842,6 +842,11 @@
             color: #333;
         }
 
+        .video-url {
+            color: #667eea;
+            text-decoration: none;
+        }
+
         /* =============== RESPONSIVE DESIGN  =============== */
         @media (max-width: 768px) {
             .main-container { padding: 10px; }
@@ -851,6 +856,7 @@
             .history-details { grid-template-columns: 1fr; }
             .visualizations-grid { grid-template-columns: 1fr; }
             .input-section { flex-direction: column; }
+            .video-url {font-size: 1rem;}
         }
 
         /* =============== SCROLL IMPROVEMENTS =============== */
@@ -954,7 +960,7 @@
         <div class="results-container">
             <h2 class="h2-1">
                 <i class="fas fa-chart-line"></i> Analysis Results for:
-                <a href="{{ video_url }}" target="_blank" style="color: #667eea; text-decoration: none;">{{ video_url }}</a>
+                <a href="{{ video_url }}" target="_blank" class="video-url">{{ video_url }}</a>
             </h2>
             <p style="text-align: center; color: #666; margin-bottom: 20px; font-size: 16px;">
                 <i class="fas fa-info-circle"></i> Analyzed {{ sentiments|length }} comments
