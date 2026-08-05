@@ -19,12 +19,18 @@ from models import User, Analysis, Comment
 from flask_login import login_user, logout_user, current_user, login_required
 import base64
 from authlib.integrations.base_client.errors import OAuthError
+from datetime import timedelta
 
 app = Flask(__name__)
 
 load_dotenv()
 
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
+
+app.config["REMEMBER_COOKIE_DURATION"] = timedelta(days=30)
+app.config["REMEMBER_COOKIE_SECURE"] = True
+app.config["REMEMBER_COOKIE_HTTPONLY"] = True
+app.config["REMEMBER_COOKIE_SAMESITE"] = "Lax"
 
 # ------------------- Database Configuration -------------------
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
@@ -36,7 +42,7 @@ bcrypt = Bcrypt(app)
 
 login_manager = LoginManager(app)
 
-login_manager.login_view = "login"
+login_manager.login_view = "google_login"
 
 login_manager.login_message = "Please login first."
 
@@ -316,7 +322,7 @@ def google_authorized():
         db.session.add(user)
         db.session.commit()
 
-    login_user(user)
+    login_user(user, remember=True)
 
     return redirect(url_for("home", login="success"))
 
