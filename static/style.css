@@ -2282,15 +2282,6 @@ background:#dc2626;
 padding:25px;
 }
 
-.delete-history-buttons{
-flex-direction:column;
-}
-
-.cancel-delete-btn,
-.confirm-delete-btn{
-width:100%;
-}
-
 .delete-history-card h2{
 font-size:24px;
 }
@@ -3948,9 +3939,6 @@ background:#3a3a3a;
 padding:28px 22px;
 }
 
-.clear-history-actions{
-flex-direction:column;
-}
 
 }
 
