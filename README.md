@@ -9,12 +9,6 @@ https://sentimental-analyzer-6epv.onrender.com
 
 ---
 
-## 📸 Screenshot
-<img width="1440" height="745" alt="image" src="https://github.com/user-attachments/assets/d1f10f57-30a8-49e5-b9b8-adc8e45ca112" />
-
-
----
-
 ## ✨ Features
 
 - Analyze comments from any public YouTube video
