@@ -23,14 +23,13 @@ https://sentimental-analyzer-6epv.onrender.com
 # 🎯 Future Enhancements
 
 - Multi-language
-- AI summary of comments
 - Keyword extraction
 - Emotion detection
-- Comparative analysis of multiple videos
+- Comparative analysis of multiple videos ✔
 - Full multilingual PDF export
 - More Accurate analysis using different Model
 - Multiple UI themes
-- Analytics dashboard
+- Analytics dashboard ✔
 
 
 ## 🛠️ Built With
