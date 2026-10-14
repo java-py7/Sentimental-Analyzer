@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Sentiments Analyzer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="AI-Powered YouTube Comment Sentiment Analyzer and Video Comparator with real-time interactive charts, word clouds, and comparative sentiment metrics.">
+    <title>YouTube Sentiment Analyzer & Comparator</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
           integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-    <link rel="icon" href="../static//image/sca-logo3.png">
+    <link rel="icon" href="../static/image/sca-logo3.png">
     <link rel="stylesheet" href="../static/style.css">
 
 </head>
@@ -41,241 +42,372 @@
     <div class="preloader-subtext" id="preloader-subtext">Fetching YouTube data and processing sentiment analysis</div>
 </div>
 
+<!-- =============== MOBILE TOPBAR (VISIBLE ON MOBILE ONLY) =============== -->
+<header class="mobile-header-bar" role="banner">
+    <button type="button" class="mobile-menu-btn" id="mobileSidebarToggle" aria-label="Open Navigation Menu" aria-controls="mobileSidebar" aria-expanded="false">
+        <i class="fas fa-bars"></i>
+    </button>
+    <div class="mobile-header-brand" onclick="openTab('home')">
+        <i class="fab fa-youtube mobile-brand-icon"></i>
+        <span class="mobile-header-title">Sentiment <span class="gradient-text">AI</span></span>
+    </div>
+    <button type="button" class="mobile-theme-btn" onclick="toggleMode()" aria-label="Toggle Dark/Light Mode" title="Toggle Theme">
+        <i class="fas fa-sun darklight-ModeToggle"></i>
+    </button>
+</header>
+
+<!-- =============== MOBILE SIDEBAR DRAWER (REPLACES FLOATING NAVBAR ON MOBILE) =============== -->
+<div id="mobileSidebarBackdrop" class="mobile-sidebar-backdrop" aria-hidden="true"></div>
+<aside id="mobileSidebar" class="mobile-sidebar-drawer" role="navigation" aria-label="Mobile Navigation" aria-hidden="true">
+    <div class="mobile-sidebar-header">
+        <div class="sidebar-brand-group" onclick="openTab('home')">
+            <div class="sidebar-logo-badge">
+                <i class="fab fa-youtube"></i>
+            </div>
+            <div>
+                <h3 class="sidebar-brand-name">YouTube Analyzer</h3>
+                <span class="sidebar-brand-tag">AI Sentiment Intelligence</span>
+            </div>
+        </div>
+        <button type="button" class="sidebar-close-btn" id="mobileSidebarClose" aria-label="Close Navigation Menu">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <div class="mobile-sidebar-nav">
+        <div class="sidebar-nav-section-title">Main Navigation</div>
+        <button type="button" class="mobile-sidebar-link active" data-tab="home" onclick="openTab('home')">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </button>
+        <button type="button" class="mobile-sidebar-link" data-tab="compare" onclick="openTab('compare')">
+            <i class="fas fa-balance-scale"></i>
+            <span>Compare Videos</span>
+        </button>
+        <button type="button" class="mobile-sidebar-link" data-tab="dashboard" onclick="openTab('dashboard')">
+            <i class="fas fa-chart-pie"></i>
+            <span>Analytics Dashboard</span>
+        </button>
+        <button type="button" class="mobile-sidebar-link" data-tab="history" onclick="openTab('history')">
+            <i class="fas fa-history"></i>
+            <span>Analysis History</span>
+        </button>
+
+        <div class="sidebar-nav-section-title">Tools & Insights</div>
+        <button type="button" class="mobile-sidebar-link" data-tab="export" onclick="openTab('export')">
+            <i class="fas fa-download" style="color: #10b981;"></i>
+            <span>Export Analysis</span>
+        </button>
+        <button type="button" class="mobile-sidebar-link" data-tab="youtube" onclick="openTab('youtube')">
+            <i class="fab fa-youtube" style="color: #ef4444;"></i>
+            <span>YouTube Shortcuts</span>
+        </button>
+        <button type="button" class="mobile-sidebar-link" data-tab="about" onclick="openTab('about')">
+            <i class="fas fa-user" style="color: #6366f1;"></i>
+            <span>Account Profile</span>
+        </button>
+        <button type="button" class="mobile-sidebar-link" data-tab="settings" onclick="openTab('settings')">
+            <i class="fas fa-cog" style="color: #64748b;"></i>
+            <span>Settings</span>
+        </button>
+    </div>
+
+    <div class="mobile-sidebar-footer">
+        <div class="sidebar-theme-row">
+            <span><i class="fas fa-circle-half-stroke"></i> Theme Appearance</span>
+            <button type="button" class="sidebar-theme-pill" onclick="toggleMode()">
+                <i class="fas fa-sun darklight-ModeToggle"></i> Toggle
+            </button>
+        </div>
+        <div class="sidebar-version-badge">
+            <span>VADER + TextBlob Dual Engine</span>
+            <small>© 2026 YouTube Sentiment Analyzer</small>
+        </div>
+    </div>
+</aside>
+
 <!-- =============== MAIN CONTENT =============== -->
 
 <div class="main-container">
 
 <!-- =============== HOME TAB =============== -->
 <div id="home" class="tab-content active">
-    
 
 <!-- =======================================================
-                    HERO SECTION
+                    HERO SECTION (GSAP-INSPIRED)
 ======================================================== -->
-
-<section class="hero">
-     <div class="hero-bg">
-        <svg class="hero-wave" viewBox="0 0 1200 700" preserveAspectRatio="none">
-            <path d="M760 -80
-                     C950 120 960 250 840 430
-                     C720 610 790 760 1100 820
-                     L1200 820
-                     L1200 -80
-                     Z"/>
-        </svg>
-
-        <div class="hero-grid"></div>
-        <div class="hero-blur blur-1"></div>
-        <div class="hero-blur blur-2"></div>
-        <div class="hero-dot dot1"></div>
-        <div class="hero-dot dot2"></div>
-
+<section class="hero gsap-reveal">
+    <div class="hero-bg">
+        <div class="hero-ambient-glow"></div>
+        <div class="hero-grid-pattern"></div>
     </div>
 
-    <!-- LEFT -->
+    <!-- LEFT CONTENT -->
     <div class="hero-content">
         <div class="hero-tag">
-            <i class="fas fa-robot"></i>
-            AI Powered Sentiment Analysis
+            <span class="live-dot"></span>
+            <i class="fas fa-brain"></i>
+            AI-Powered Sentiment Intelligence
         </div>
-        <h1>
-            YouTube
-            <span>Sentiment Analyzer</span>
+        <h1 class="hero-headline">
+            Understand Any <span class="gradient-text">YouTube Audience</span> in Seconds
         </h1>
-        <p>
-            Analyze YouTube comments using AI-powered
-            sentiment analysis. Generate interactive charts,
-            beautiful word clouds and discover how your
-            audience truly feels in seconds.
+        <p class="hero-subline">
+            Decode comments with hybrid NLP (VADER + TextBlob). Generate dynamic word clouds, sentiment distribution charts, and compare audience reception between any two videos.
         </p>
+
+        <div class="hero-feature-pills">
+            <span class="feature-pill"><i class="fas fa-bolt"></i> Real-time NLP</span>
+            <span class="feature-pill"><i class="fas fa-chart-pie"></i> Live Charts</span>
+            <span class="feature-pill"><i class="fas fa-cloud"></i> Word Clouds</span>
+            <span class="feature-pill"><i class="fas fa-balance-scale"></i> 2-Video Comparator</span>
+        </div>
     </div>
 
-    <!-- RIGHT -->
+    <!-- RIGHT VISUAL / LIVE MOCKUP -->
+    <div class="hero-visual-card gsap-reveal" style="--delay: 0.15s;">
+        <div class="visual-card-glass">
+            <div class="visual-card-header">
+                <div class="visual-dot-group">
+                    <span class="v-dot red"></span>
+                    <span class="v-dot yellow"></span>
+                    <span class="v-dot green"></span>
+                </div>
+                <span class="visual-status-pill"><i class="fas fa-circle-check"></i> Live Sentiment Radar</span>
+            </div>
 
-    <div class="hero-image">
-        <img src="../static/image/sca-bg.png" alt="Illustration">
-    </div>
+            <div class="visual-preview-body">
+                <div class="visual-video-chip">
+                    <i class="fab fa-youtube"></i>
+                    <div>
+                        <strong>Audience Reception Pulse</strong>
+                        <small>VADER + TextBlob Dual Engine</small>
+                    </div>
+                </div>
 
-    <div class="hero-cards">
-            <div class="hero-card">
-                <div class="hero-icon purple">
-                    <i class="fas fa-brain"></i>
+                <div class="visual-metric-display">
+                    <div class="metric-score-circle">
+                        <span class="score-value">84%</span>
+                        <span class="score-tag">Positive</span>
+                    </div>
+                    <div class="metric-bars-mini">
+                        <div class="mini-bar-row">
+                            <span>Positive</span>
+                            <div class="bar-track"><div class="bar-fill pos" style="width: 84%;"></div></div>
+                            <strong>84%</strong>
+                        </div>
+                        <div class="mini-bar-row">
+                            <span>Neutral</span>
+                            <div class="bar-track"><div class="bar-fill neu" style="width: 11%;"></div></div>
+                            <strong>11%</strong>
+                        </div>
+                        <div class="mini-bar-row">
+                            <span>Negative</span>
+                            <div class="bar-track"><div class="bar-fill neg" style="width: 5%;"></div></div>
+                            <strong>5%</strong>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <h4>AI Analysis</h4>
-                    <span>Smart & Accurate</span>
+
+                <!-- FLOATING SENTIMENT CHIPS -->
+                <div class="floating-chip chip-1">
+                    <i class="fas fa-heart text-green"></i> "Explained everything so clearly! 🔥"
                 </div>
-            </div>
-            <div class="hero-card">
-                <div class="hero-icon green">
-                    <i class="fas fa-chart-bar"></i>
-                </div>
-                <div>
-                    <h4>Live Charts</h4>
-                    <span>Interactive Visuals</span>
-                </div>
-            </div>
-            <div class="hero-card">
-                <div class="hero-icon blue">
-                    <i class="fas fa-cloud"></i>
-                </div>
-                <div>
-                    <h4>Word Cloud</h4>
-                    <span>Beautiful Clouds</span>
-                </div>
-            </div>
-            <div class="hero-card">
-                <div class="hero-icon orange">
-                    <i class="fas fa-lightbulb"></i>
-                </div>
-                <div>
-                    <h4>Insights</h4>
-                    <span>Deep Understanding</span>
+                <div class="floating-chip chip-2">
+                    <i class="fas fa-thumbs-up text-purple"></i> "Top tier analysis and breakdown 👏"
                 </div>
             </div>
         </div>
-
+    </div>
 </section>
 
+<!-- 3-STEP WORKFLOW STRIP -->
+<div class="workflow-strip gsap-reveal" style="--delay: 0.1s;">
+    <div class="workflow-step">
+        <span class="step-num">01</span>
+        <div>
+            <h4>Paste Video Link</h4>
+            <p>Any public YouTube video or Shorts</p>
+        </div>
+    </div>
+    <div class="workflow-arrow"><i class="fas fa-chevron-right"></i></div>
+    <div class="workflow-step">
+        <span class="step-num">02</span>
+        <div>
+            <h4>AI Analyzes Comments</h4>
+            <p>VADER + TextBlob sentiment scoring</p>
+        </div>
+    </div>
+    <div class="workflow-arrow"><i class="fas fa-chevron-right"></i></div>
+    <div class="workflow-step">
+        <span class="step-num">03</span>
+        <div>
+            <h4>Explore Insights</h4>
+            <p>Charts, word clouds & comparative data</p>
+        </div>
+    </div>
+</div>
 
 <!-- =======================================================
-                    ANALYZE CARD
+               ANALYZE COMMAND CENTER (FORM)
 ======================================================== -->
+<div class="analyze-command-center gsap-reveal" style="--delay: 0.15s;">
+    <div class="command-center-header">
+        <div class="command-title-group">
+            <div class="command-icon-badge">
+                <i class="fab fa-youtube"></i>
+            </div>
+            <div>
+                <h3>Analyze Video Sentiment</h3>
+                <p>Paste any YouTube video link to inspect real audience reactions</p>
+            </div>
+        </div>
+        <div class="security-chip">
+            <i class="fas fa-shield-halved"></i>
+            <span>Privacy Secured • Official YouTube API</span>
+        </div>
+    </div>
 
-<div class="analyze-card">
-
-    <form action="/analyze" method="POST">
-        <div class="form-grid">
-            <div class="form-group">
-                <small>
-                    <i class="fas fa-shield-alt"></i>
-                    Your video is processed securely. We never store
-                    your private data.
-                </small>
-                <br>
-                <label>
-                    <i class="fab fa-youtube"></i>
-                    YouTube Video URL
-                </label>
+    <form action="/analyze" method="POST" id="mainAnalyzeForm" class="analyze-form">
+        <div class="analyze-input-bar">
+            <div class="url-input-wrapper">
+                <i class="fab fa-youtube url-lead-icon"></i>
                 <input
                     type="text"
                     class="url-input"
+                    id="mainVideoUrl"
                     name="video_url"
-                    placeholder="https://youtube.com/watch?v=..."
+                    placeholder="Paste YouTube video or Shorts link (e.g., https://youtu.be/...)"
+                    autocomplete="off"
                     required>
+                <button type="button" class="paste-url-btn" id="pasteUrlBtn" title="Paste from clipboard">
+                    <i class="fas fa-paste"></i> <span>Paste</span>
+                </button>
             </div>
-            <div class="form-group">
-                <label>
-                    <i class="fas fa-sliders-h"></i>
-                    Comment Limit
-                </label>
-                <select
-                    class="comment-limit-select"
-                    name="max_comments">
+
+            <div class="limit-selector-wrapper">
+                <i class="fas fa-sliders-h limit-icon"></i>
+                <select class="comment-limit-select" name="max_comments" id="mainMaxComments">
                     <option value="50">50 Comments</option>
                     <option value="100">100 Comments</option>
-                    <option value="200" selected>
-                        200 Comments
-                    </option>
-                    <option value="500">
-                        500 Comments
-                    </option>
-                    <option value="1000">
-                        1000 Comments
-                    </option>
-                    <option value="2000">
-                        2000 Comments
-                    </option>
-                    <option value="all" disabled>
-                        All Comments (Coming Soon)
-                    </option>
+                    <option value="200" selected>200 Comments</option>
+                    <option value="500">500 Comments</option>
+                    <option value="1000">1000 Comments</option>
+                    <option value="2000">2000 Comments</option>
                 </select>
             </div>
 
-            <button
-                type="submit"
-                class="analyze-btn">
-                Analyze Video
+            <button type="submit" class="analyze-btn" id="mainAnalyzeBtn">
+                <i class="fas fa-wand-magic-sparkles"></i>
+                <span>Analyze Video</span>
             </button>
+        </div>
 
+        <div class="quick-try-row">
+            <span class="quick-try-label"><i class="fas fa-lightbulb"></i> Quick Try:</span>
+            <button type="button" class="quick-chip" onclick="fillSampleVideo('https://www.youtube.com/watch?v=dQw4w9WgXcQ')">Rick Astley - Never Gonna Give You Up</button>
+            <button type="button" class="quick-chip" onclick="fillSampleVideo('https://www.youtube.com/watch?v=9bZkp7q19f0')">PSY - Gangnam Style</button>
+            <button type="button" class="quick-chip" onclick="fillSampleVideo('https://www.youtube.com/watch?v=jNQXAC9IVRw')">Me at the zoo</button>
         </div>
     </form>
 </div>
 
-        {% if error %}
-        <div class="error-message">
-            <i class="fas fa-exclamation-triangle"></i> {{ error }}
-        </div>
-        {% endif %}
+{% if error %}
+<div class="error-message">
+    <i class="fas fa-exclamation-triangle"></i> {{ error }}
+</div>
+{% endif %}
 
 <!-- =======================================================
-                    RESULTS
+                    RESULTS SECTION
 ======================================================== -->
-
 <div id="resultsContainer" class="results-container">
-    <div class="results-header">
-        <div>
-            <span class="results-badge">
-                <i class="fas fa-chart-line"></i>
-                Analysis Results
-            </span>
-            <h2 id="results-title" class="results-title" style="display: none;">
-                Analysis Results For : <a id="analysisVideo" class="analysis-video"></a>
-            </h2>
+    <div class="results-header gsap-reveal">
+        <div class="results-meta-banner" id="resultsMetaBanner">
+            <div class="meta-thumbnail-wrapper">
+                <img id="resultsThumbnail" class="meta-thumbnail" src="" alt="Video Thumbnail" style="display: none;">
+                <div id="thumbnailFallback" class="meta-thumbnail-fallback">
+                    <i class="fab fa-youtube"></i>
+                </div>
+            </div>
+            <div class="meta-details">
+                <div class="meta-badge-row">
+                    <span class="results-badge"><i class="fas fa-check-circle"></i> Analysis Completed</span>
+                    <span class="meta-id-tag" id="resultsVideoIdTag" style="display: none;"></span>
+                </div>
+                <h2 id="results-title" class="results-title">
+                    <a id="analysisVideo" class="analysis-video" target="_blank" rel="noopener noreferrer"></a>
+                </h2>
+                <div class="meta-stats-row">
+                    <span><i class="fas fa-comments"></i> <strong id="resultsTotalBadge">0</strong> Comments Analyzed</span>
+                    <span><i class="fas fa-bolt"></i> Real-time AI NLP</span>
+                    <a id="resultsExternalLink" href="#" target="_blank" rel="noopener noreferrer" class="watch-youtube-btn" style="display: none;">
+                        <i class="fab fa-youtube"></i> Watch Video <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="stats-grid">
+    <!-- ELEVATED 4-CARD STATS GRID -->
+    <div class="stats-grid gsap-reveal" style="--delay: 0.1s;">
         <div class="stat-card total-card">
-            <div class="stat-icon">
-                <i class="fas fa-comments"></i>
+            <div class="stat-card-top">
+                <div class="stat-icon purple"><i class="fas fa-comments"></i></div>
+                <span class="stat-trend-tag total"><i class="fas fa-database"></i> 100% Volume</span>
             </div>
             <div class="stat-content">
-                <span class="stat-label">
-                    Total Comments
-                </span>
-                <h2 class="stat-number total-comments">
-                    0
-                </h2>
+                <span class="stat-label">Total Analyzed</span>
+                <h2 class="stat-number total-comments">0</h2>
+                <div class="stat-progress-bar">
+                    <div class="progress-fill total" style="width: 100%;"></div>
+                </div>
+                <span class="stat-footnote">Evaluated top-level comments</span>
             </div>
         </div>
+
         <div class="stat-card positive-card">
-            <div class="stat-icon">
-                <i class="fas fa-smile"></i>
+            <div class="stat-card-top">
+                <div class="stat-icon green"><i class="fas fa-smile"></i></div>
+                <span class="stat-trend-tag positive" id="posTrendTag">0.0%</span>
             </div>
             <div class="stat-content">
-                <span class="stat-label">
-                    Positive
-                </span>
-                <h2 class="stat-number">
-                    0
-                </h2>
+                <span class="stat-label">Positive Sentiment</span>
+                <h2 class="stat-number">0</h2>
+                <div class="stat-progress-bar">
+                    <div class="progress-fill positive" id="posProgressFill" style="width: 0%;"></div>
+                </div>
+                <span class="stat-footnote">Supportive & enthusiastic audience</span>
             </div>
         </div>
+
         <div class="stat-card negative-card">
-            <div class="stat-icon">
-                <i class="fas fa-frown"></i>
+            <div class="stat-card-top">
+                <div class="stat-icon red"><i class="fas fa-frown"></i></div>
+                <span class="stat-trend-tag negative" id="negTrendTag">0.0%</span>
             </div>
             <div class="stat-content">
-                <span class="stat-label">
-                    Negative
-                </span>
-                <h2 class="stat-number">
-                    0
-                </h2>
+                <span class="stat-label">Negative Sentiment</span>
+                <h2 class="stat-number">0</h2>
+                <div class="stat-progress-bar">
+                    <div class="progress-fill negative" id="negProgressFill" style="width: 0%;"></div>
+                </div>
+                <span class="stat-footnote">Critical or disapproving remarks</span>
             </div>
         </div>
+
         <div class="stat-card neutral-card">
-            <div class="stat-icon">
-                <i class="fas fa-meh"></i>
+            <div class="stat-card-top">
+                <div class="stat-icon amber"><i class="fas fa-meh"></i></div>
+                <span class="stat-trend-tag neutral" id="neuTrendTag">0.0%</span>
             </div>
             <div class="stat-content">
-                <span class="stat-label">
-                    Neutral
-                </span>
-                <h2 class="stat-number">
-                    0
-                </h2>
+                <span class="stat-label">Neutral Sentiment</span>
+                <h2 class="stat-number">0</h2>
+                <div class="stat-progress-bar">
+                    <div class="progress-fill neutral" id="neuProgressFill" style="width: 0%;"></div>
+                </div>
+                <span class="stat-footnote">Inquiries, timestamps & observations</span>
             </div>
         </div>
     </div>
@@ -283,138 +415,544 @@
     <!-- =====================================
                 VISUALIZATIONS
     ====================================== -->
-
-    <div class="visualization-grid">
-
+    <div class="visualization-grid gsap-reveal" style="--delay: 0.15s;">
         <!-- WORD CLOUD -->
-        <div class="dashboard-card">
+        <div class="dashboard-card visual-box">
             <div class="card-header">
-                <div>
-                    <h3>
-                        <i class="fas fa-cloud"></i>
-                        Word Cloud
-                    </h3>
-                    <span>
-                        Most frequently used words
-                    </span>
+                <div class="card-header-left">
+                    <div class="card-icon-tag purple"><i class="fas fa-cloud"></i></div>
+                    <div>
+                        <h3>Audience Word Cloud</h3>
+                        <span>Frequently highlighted terms & keywords</span>
+                    </div>
                 </div>
+                <button type="button" class="card-action-btn" onclick="downloadWordCloud()" title="Download Word Cloud PNG">
+                    <i class="fas fa-download"></i> <span>Save PNG</span>
+                </button>
             </div>
-            <div id="wordCloudWrapper">
-            <div id="wordCloudEmpty" class="empty-card">
-                <i class="fas fa-cloud"></i>
-                <h4>No Word Cloud Yet</h4>
-                <p>
-                    Analyze a YouTube video to generate
-                    a beautiful word cloud.
-                </p>
+            <div id="wordCloudWrapper" class="wordcloud-container">
+                <div id="wordCloudEmpty" class="empty-card">
+                    <div class="empty-icon-ring"><i class="fas fa-cloud"></i></div>
+                    <h4>Word Cloud Awaiting Video</h4>
+                    <p>Analyze any YouTube video above to synthesize a dynamic word cloud of audience topics.</p>
+                </div>
+                <canvas id="wordCloud"></canvas>
             </div>
-            <canvas id="wordCloud"
-                    width="900"
-                    height="400">
-            </canvas>
-        </div>
         </div>
 
-        <!-- CHART -->
-        <div class="dashboard-card">
+        <!-- SENTIMENT CHART -->
+        <div class="dashboard-card visual-box">
             <div class="card-header">
-                <div>
-                    <h3>
-                        <i class="fas fa-chart-bar"></i>
-                        Sentiment Distribution
-                    </h3>
-                    <span>
-                        Positive vs Negative vs Neutral
-                    </span>
+                <div class="card-header-left">
+                    <div class="card-icon-tag green"><i class="fas fa-chart-column"></i></div>
+                    <div>
+                        <h3>Sentiment Distribution</h3>
+                        <span>Positive vs Negative vs Neutral breakdown</span>
+                    </div>
                 </div>
+                <button type="button" class="card-action-btn" onclick="downloadChart()" title="Download Chart PNG">
+                    <i class="fas fa-download"></i> <span>Save PNG</span>
+                </button>
             </div>
-            <div id="sentimentChart">
+            <div id="sentimentChart" class="chart-container-box">
                 <div class="empty-card">
-                    <i class="fas fa-chart-bar"></i>
-                    <h4>No Chart Yet</h4>
-                    <p>
-                        Analyze a YouTube video to visualize
-                        sentiment distribution.
-                    </p>
+                    <div class="empty-icon-ring"><i class="fas fa-chart-column"></i></div>
+                    <h4>Chart Awaiting Video</h4>
+                    <p>Analyze a YouTube video to visualize sentiment distribution.</p>
                 </div>
             </div>
         </div>
-
     </div>
-
 </div>
- 
+
 <!-- =======================================================
-                    COMMENTS
+                    COMMENTS FEED
 ======================================================== -->
-
-<div class="comments-section">
-
+<div class="comments-section gsap-reveal" style="--delay: 0.2s;">
     <div class="comments-top">
-        <div>
+        <div class="comments-header-left">
             <span class="comments-badge">
                 <i class="fas fa-comments"></i>
-                AI Comment Analysis
+                Audience Feedback Feed
             </span>
             <h2 class="comments-heading">
-                <i class="fas fa-comment-dots" style="color: blueviolet;"></i>
                 Analyzed Comments
             </h2>
             <p class="comments-subtitle">
-                Search, filter and explore every analyzed
-                YouTube comment with its predicted sentiment.
+                Search, filter, and inspect individual comment predictions from real viewer feedback.
             </p>
         </div>
+        <div class="comments-counter-badge" id="commentsCounterBadge">
+            <i class="fas fa-message"></i> <span id="commentsCountText">0 Comments</span>
+        </div>
     </div>
-
 
     <div class="comments-toolbar">
         <div class="search-box">
-            <i class="fas fa-search"></i>
+            <i class="fas fa-search search-icon"></i>
             <input
                 type="text"
                 id="commentSearch"
-                placeholder="Search comments...">
+                placeholder="Search comments by keyword...">
+            <button type="button" class="search-clear-btn" id="searchClearBtn" onclick="clearCommentSearch()" style="display: none;">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
 
-        <select id="sentimentFilter">
-            <option value="all">
-                All Sentiments
-            </option>
-            <option value="Positive">
-                Positive
-            </option>
-            <option value="Negative">
-                Negative
-            </option>
-            <option value="Neutral">
-                Neutral
-            </option>
+        <div class="sentiment-pill-group" role="group" aria-label="Sentiment Filters">
+            <button type="button" class="filter-pill active" data-sentiment="all" onclick="selectSentimentFilter('all')">
+                All
+            </button>
+            <button type="button" class="filter-pill positive" data-sentiment="Positive" onclick="selectSentimentFilter('Positive')">
+                <i class="fas fa-smile"></i> Positive
+            </button>
+            <button type="button" class="filter-pill negative" data-sentiment="Negative" onclick="selectSentimentFilter('Negative')">
+                <i class="fas fa-frown"></i> Negative
+            </button>
+            <button type="button" class="filter-pill neutral" data-sentiment="Neutral" onclick="selectSentimentFilter('Neutral')">
+                <i class="fas fa-meh"></i> Neutral
+            </button>
+        </div>
+
+        <!-- Hidden select element preserved for JavaScript backward compatibility -->
+        <select id="sentimentFilter" style="display: none;">
+            <option value="all">All Sentiments</option>
+            <option value="Positive">Positive</option>
+            <option value="Negative">Negative</option>
+            <option value="Neutral">Neutral</option>
         </select>
     </div>
 
-
     <div class="comments-list">
         <div class="no-comments">
-            <div class="empty-icon"  style="color: blueviolet;">
-                    <i class="fas fa-comment-dots"></i>
+            <div class="empty-icon-ring">
+                <i class="fas fa-comment-dots"></i>
             </div>
-
-            <h3>
-                No Comments Yet
-            </h3>
-            <p>
-                Paste a YouTube video URL and click
-                <strong>Analyze Video</strong> to start
-                exploring audience sentiment.
-            </p>
+            <h3>No Comments Loaded Yet</h3>
+            <p>Paste a YouTube video URL above and click <strong>Analyze Video</strong> to explore audience sentiment.</p>
         </div>
     </div>
 </div>
 </div>  
+
+<!-- =============== COMPARE TAB =============== -->
+<div id="compare" class="tab-content">
+    <div class="compare-page">
+        <!-- HEADER -->
+        <div class="page-header gsap-reveal">
+            <span class="page-badge compare-badge">
+                <i class="fas fa-balance-scale"></i> Video Sentiment Comparator
+            </span>
+            <h1 class="page-title">
+                Compare <span>Two YouTube Videos</span>
+            </h1>
+            <p class="page-subtitle">
+                Evaluate and contrast audience reactions side-by-side using real comments and AI sentiment classification.
+            </p>
+        </div>
+
+        <!-- DUAL URL INPUT FORM -->
+        <div class="compare-form-card gsap-reveal" style="--delay: 0.1s;">
+            <form id="compareForm" action="/compare" method="POST">
+                <div class="compare-inputs-grid">
+                    <!-- VIDEO A -->
+                    <div class="compare-video-box box-a">
+                        <div class="compare-box-header">
+                            <span class="box-tag tag-a"><i class="fab fa-youtube"></i> Video A</span>
+                            <small class="box-hint">First Video</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="compareUrlA">
+                                <i class="fas fa-link"></i> YouTube URL
+                            </label>
+                            <input
+                                type="text"
+                                id="compareUrlA"
+                                name="video_url_a"
+                                class="url-input"
+                                placeholder="https://youtube.com/watch?v=..."
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="compareLimitA">
+                                <i class="fas fa-sliders-h"></i> Comment Limit
+                            </label>
+                            <select id="compareLimitA" name="max_comments_a" class="comment-limit-select">
+                                <option value="50">50 Comments</option>
+                                <option value="100">100 Comments</option>
+                                <option value="200" selected>200 Comments</option>
+                                <option value="500">500 Comments</option>
+                                <option value="1000">1000 Comments</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- VS DIVIDER -->
+                    <div class="compare-vs-divider">
+                        <div class="vs-circle">VS</div>
+                    </div>
+
+                    <!-- VIDEO B -->
+                    <div class="compare-video-box box-b">
+                        <div class="compare-box-header">
+                            <span class="box-tag tag-b"><i class="fab fa-youtube"></i> Video B</span>
+                            <small class="box-hint">Second Video</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="compareUrlB">
+                                <i class="fas fa-link"></i> YouTube URL
+                            </label>
+                            <input
+                                type="text"
+                                id="compareUrlB"
+                                name="video_url_b"
+                                class="url-input"
+                                placeholder="https://youtube.com/watch?v=..."
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="compareLimitB">
+                                <i class="fas fa-sliders-h"></i> Comment Limit
+                            </label>
+                            <select id="compareLimitB" name="max_comments_b" class="comment-limit-select">
+                                <option value="50">50 Comments</option>
+                                <option value="100">100 Comments</option>
+                                <option value="200" selected>200 Comments</option>
+                                <option value="500">500 Comments</option>
+                                <option value="1000">1000 Comments</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="compare-actions-bar">
+                    <button type="submit" class="compare-submit-btn" id="compareSubmitBtn">
+                        <i class="fas fa-balance-scale"></i> Compare Videos
+                    </button>
+                    <button type="button" class="compare-reset-btn" id="compareResetBtn" onclick="resetComparisonForm()">
+                        <i class="fas fa-rotate-left"></i> Reset
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- EMPTY STATE -->
+        <div id="compareEmptyState" class="compare-empty-state gsap-reveal" style="--delay: 0.2s;">
+            <div class="empty-icon-wrap">
+                <i class="fas fa-balance-scale"></i>
+            </div>
+            <h3>Ready to Compare</h3>
+            <p>Paste two distinct YouTube video URLs above and click <strong>Compare Videos</strong> to generate real-time comparative metrics, grouped visualizations, and delta analytics.</p>
+            <div class="compare-features-preview">
+                <div class="feature-pill"><i class="fas fa-chart-column"></i> Grouped Sentiment Comparison</div>
+                <div class="feature-pill"><i class="fas fa-percentage"></i> Sentiment Delta Calculation</div>
+                <div class="feature-pill"><i class="fas fa-table-list"></i> Side-by-Side Metric Matrix</div>
+                <div class="feature-pill"><i class="fas fa-download"></i> Export Comparison Reports</div>
+            </div>
+        </div>
+
+        <!-- REAL COMPARISON RESULTS CONTAINER -->
+        <div id="compareResultsContainer" class="compare-results-container" style="display: none;">
+            
+            <!-- SUMMARY / DELTA BANNER -->
+            <div class="compare-insight-card" id="compareInsightCard">
+                <div class="insight-badge-row">
+                    <span class="insight-badge" id="compareLeadBadge">
+                        <i class="fas fa-trophy"></i> Lead: Video A
+                    </span>
+                    <span class="insight-diff-pill" id="compareDiffPill">
+                        +0% Positive Margin
+                    </span>
+                </div>
+                <h3 id="compareSummaryTitle" class="insight-title">Comparative Analysis Summary</h3>
+                <p id="compareSummaryText" class="insight-text">
+                    Calculating real sentiment metrics...
+                </p>
+            </div>
+
+            <!-- SIDE-BY-SIDE VIDEO PROFILE CARDS -->
+            <div class="compare-cards-grid">
+                <!-- VIDEO A RESULT CARD -->
+                <div class="compare-profile-card card-a">
+                    <div class="profile-header">
+                        <span class="profile-tag tag-a"><i class="fab fa-youtube"></i> Video A</span>
+                        <a id="compLinkA" href="#" target="_blank" class="profile-external-link" title="Open on YouTube">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                    <div class="profile-thumb-wrap">
+                        <img id="compThumbA" src="" alt="Video A Thumbnail" class="profile-thumb" onerror="this.style.display='none'">
+                    </div>
+                    <h3 id="compTitleA" class="profile-video-title">Video A Title</h3>
+                    
+                    <div class="profile-stats-grid">
+                        <div class="p-stat">
+                            <span class="p-stat-label">Total Analyzed</span>
+                            <strong id="compTotalA">0</strong>
+                        </div>
+                        <div class="p-stat positive">
+                            <span class="p-stat-label">Positive</span>
+                            <strong><span id="compPosA">0</span> (<span id="compPosPctA">0%</span>)</strong>
+                        </div>
+                        <div class="p-stat negative">
+                            <span class="p-stat-label">Negative</span>
+                            <strong><span id="compNegA">0</span> (<span id="compNegPctA">0%</span>)</strong>
+                        </div>
+                        <div class="p-stat neutral">
+                            <span class="p-stat-label">Neutral</span>
+                            <strong><span id="compNeuA">0</span> (<span id="compNeuPctA">0%</span>)</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIDEO B RESULT CARD -->
+                <div class="compare-profile-card card-b">
+                    <div class="profile-header">
+                        <span class="profile-tag tag-b"><i class="fab fa-youtube"></i> Video B</span>
+                        <a id="compLinkB" href="#" target="_blank" class="profile-external-link" title="Open on YouTube">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                    <div class="profile-thumb-wrap">
+                        <img id="compThumbB" src="" alt="Video B Thumbnail" class="profile-thumb" onerror="this.style.display='none'">
+                    </div>
+                    <h3 id="compTitleB" class="profile-video-title">Video B Title</h3>
+                    
+                    <div class="profile-stats-grid">
+                        <div class="p-stat">
+                            <span class="p-stat-label">Total Analyzed</span>
+                            <strong id="compTotalB">0</strong>
+                        </div>
+                        <div class="p-stat positive">
+                            <span class="p-stat-label">Positive</span>
+                            <strong><span id="compPosB">0</span> (<span id="compPosPctB">0%</span>)</strong>
+                        </div>
+                        <div class="p-stat negative">
+                            <span class="p-stat-label">Negative</span>
+                            <strong><span id="compNegB">0</span> (<span id="compNegPctB">0%</span>)</strong>
+                        </div>
+                        <div class="p-stat neutral">
+                            <span class="p-stat-label">Neutral</span>
+                            <strong><span id="compNeuB">0</span> (<span id="compNeuPctB">0%</span>)</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COMPARATIVE VISUALIZATIONS -->
+            <div class="compare-visuals-grid">
+                <!-- GROUPED BAR CHART -->
+                <div class="dashboard-card compare-chart-card">
+                    <div class="card-header">
+                        <div>
+                            <h3><i class="fas fa-chart-column"></i> Sentiment Share Comparison (%)</h3>
+                            <span>Direct side-by-side percentage comparison</span>
+                        </div>
+                    </div>
+                    <div class="chart-canvas-container" style="height: 320px; position: relative;">
+                        <canvas id="compareGroupedCanvas"></canvas>
+                    </div>
+                </div>
+
+                <!-- DONUT DISTRIBUTION CHARTS -->
+                <div class="dashboard-card compare-chart-card">
+                    <div class="card-header">
+                        <div>
+                            <h3><i class="fas fa-chart-pie"></i> Distribution Breakdown</h3>
+                            <span>Individual sentiment compositions</span>
+                        </div>
+                    </div>
+                    <div class="dual-donut-grid">
+                        <div class="donut-wrapper">
+                            <span class="donut-label">Video A</span>
+                            <div style="height: 240px; position: relative;">
+                                <canvas id="compDonutA"></canvas>
+                            </div>
+                        </div>
+                        <div class="donut-wrapper">
+                            <span class="donut-label">Video B</span>
+                            <div style="height: 240px; position: relative;">
+                                <canvas id="compDonutB"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- METRIC MATRIX COMPARISON TABLE -->
+            <div class="dashboard-card compare-table-card">
+                <div class="card-header">
+                    <div>
+                        <h3><i class="fas fa-table-list"></i> Key Metrics Comparison Table</h3>
+                        <span>Objective breakdown of calculated parameters</span>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="compare-metrics-table">
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Video A</th>
+                                <th>Video B</th>
+                                <th>Difference (A vs B)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="compareTableBody">
+                            <!-- Populated dynamically from real data -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- SIDE-BY-SIDE SAMPLE COMMENTS -->
+            <div class="dashboard-card compare-comments-card">
+                <div class="card-header">
+                    <div>
+                        <h3><i class="fas fa-comments"></i> Analyzed Comments Sample</h3>
+                        <span>Representative comments evaluated for each video</span>
+                    </div>
+                </div>
+                <div class="compare-comments-dual-grid">
+                    <div class="comments-column col-a">
+                        <h4 class="col-title"><i class="fab fa-youtube"></i> Video A Comments</h4>
+                        <div id="compCommentsListA" class="comp-comments-list"></div>
+                    </div>
+                    <div class="comments-column col-b">
+                        <h4 class="col-title"><i class="fab fa-youtube"></i> Video B Comments</h4>
+                        <div id="compCommentsListB" class="comp-comments-list"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXPORT COMPARISON BAR -->
+            <div class="compare-export-bar">
+                <div class="export-bar-left">
+                    <i class="fas fa-file-export"></i>
+                    <span>Export Real Comparison Data:</span>
+                </div>
+                <div class="export-bar-buttons">
+                    <button type="button" class="comp-export-btn" onclick="exportComparisonJSON()"><i class="fas fa-code"></i> JSON</button>
+                    <button type="button" class="comp-export-btn" onclick="exportComparisonCSV()"><i class="fas fa-file-csv"></i> CSV</button>
+                    <button type="button" class="comp-export-btn" onclick="exportComparisonTXT()"><i class="fas fa-file-alt"></i> TXT Report</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>
 
+<!-- =============== DASHBOARD TAB =============== -->
+<div id="dashboard" class="tab-content">
+    <div class="dashboard-page">
+        <!-- HEADER -->
+        <div class="page-header gsap-reveal">
+            <div class="dashboard-header-flex">
+                <div>
+                    <span class="page-badge dashboard-badge">
+                        <i class="fas fa-chart-pie"></i> Analytics Hub
+                    </span>
+                    <h1 class="page-title">
+                        Sentiment <span>Analytics Dashboard</span>
+                    </h1>
+                    <p class="page-subtitle">
+                        Aggregated sentiment insights, analysis history metrics, and audience reception trends.
+                    </p>
+                </div>
+                <div class="dashboard-quick-actions">
+                    <button class="dash-action-btn primary" onclick="openTab('home')">
+                        <i class="fas fa-plus"></i> New Analysis
+                    </button>
+                    <button class="dash-action-btn secondary" onclick="openTab('compare')">
+                        <i class="fas fa-balance-scale"></i> Compare Videos
+                    </button>
+                </div>
+            </div>
+        </div>
 
+        <!-- STAT METRICS GRID (4 CARDS) -->
+        <div class="dash-stats-grid gsap-reveal" style="--delay: 0.1s;">
+            <div class="dash-stat-card">
+                <div class="dash-stat-icon purple">
+                    <i class="fas fa-folder-open"></i>
+                </div>
+                <div class="dash-stat-info">
+                    <span class="dash-stat-label">Saved Analyses</span>
+                    <h2 class="dash-stat-value" id="dashTotalAnalyses">0</h2>
+                </div>
+            </div>
+            <div class="dash-stat-card">
+                <div class="dash-stat-icon blue">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <div class="dash-stat-info">
+                    <span class="dash-stat-label">Comments Analyzed</span>
+                    <h2 class="dash-stat-value" id="dashTotalComments">0</h2>
+                </div>
+            </div>
+            <div class="dash-stat-card">
+                <div class="dash-stat-icon green">
+                    <i class="fas fa-smile"></i>
+                </div>
+                <div class="dash-stat-info">
+                    <span class="dash-stat-label">Avg. Positive Sentiment</span>
+                    <h2 class="dash-stat-value" id="dashAvgPositive">0%</h2>
+                </div>
+            </div>
+            <div class="dash-stat-card">
+                <div class="dash-stat-icon orange">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="dash-stat-info">
+                    <span class="dash-stat-label">Sentiment Health Score</span>
+                    <h2 class="dash-stat-value" id="dashHealthScore">--</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- MAIN DASHBOARD CONTENT -->
+        <div class="dash-content-grid gsap-reveal" style="--delay: 0.2s;">
+            <!-- RECENT ANALYSES -->
+            <div class="dashboard-card dash-recent-card">
+                <div class="card-header">
+                    <div>
+                        <h3><i class="fas fa-history"></i> Recent Analyses</h3>
+                        <span>Latest videos analyzed in your account</span>
+                    </div>
+                    <button class="dash-view-all-btn" onclick="openTab('history')">
+                        View All <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div id="dashRecentList" class="dash-recent-list">
+                    <!-- Populated dynamically from real data -->
+                </div>
+                <div id="dashEmptyState" class="dash-empty-state" style="display: none;">
+                    <i class="fas fa-chart-line"></i>
+                    <h4>No Analysis Records Yet</h4>
+                    <p>Analyze a video on the Home page or Compare two videos to populate your analytics dashboard.</p>
+                    <button class="dash-cta-btn" onclick="openTab('home')">Start Your First Analysis</button>
+                </div>
+            </div>
+
+            <!-- AGGREGATE SENTIMENT BREAKDOWN -->
+            <div class="dashboard-card dash-chart-card">
+                <div class="card-header">
+                    <div>
+                        <h3><i class="fas fa-chart-pie"></i> Historical Sentiment Share</h3>
+                        <span>Cumulative distribution across all saved analyses</span>
+                    </div>
+                </div>
+                <div id="dashChartContainer" style="height: 300px; position: relative;">
+                    <canvas id="dashAggregateChart"></canvas>
+                </div>
+                <div id="dashChartEmpty" class="empty-card" style="display: none;">
+                    <i class="fas fa-chart-pie"></i>
+                    <h4>Chart Not Available</h4>
+                    <p>Save analyses to visualize overall historical sentiment trends.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- =============== HISTORY TAB =============== -->
 <div id="history" class="tab-content">
@@ -532,19 +1070,39 @@
     </div>
             <!-- Charts -->
             <div class="history-result-grid">
-                <div class="history-result-card">
+                <div class="history-result-card" id="historyChartCard">
                     <h3>
                         <i class="fas fa-chart-pie"></i>
                         Sentiment Distribution
                     </h3>
-                    <img id="historyChart">
+                    <div class="history-vis-container">
+                        <div id="historyChartLoader" class="history-vis-loader">
+                            <i class="fas fa-circle-notch fa-spin"></i>
+                            <span>Loading visualization...</span>
+                        </div>
+                        <img id="historyChart" class="history-vis-img" style="display: none;" alt="Sentiment Distribution">
+                        <div id="historyChartFallback" class="history-vis-fallback" style="display: none;">
+                            <i class="fas fa-chart-pie"></i>
+                            <span>Visualization not available for this record</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="history-result-card">
+                <div class="history-result-card" id="historyWordCloudCard">
                     <h3>
                         <i class="fas fa-cloud"></i>
                         Word Cloud
                     </h3>
-                    <img id="historyWordCloud">
+                    <div class="history-vis-container">
+                        <div id="historyWordCloudLoader" class="history-vis-loader">
+                            <i class="fas fa-circle-notch fa-spin"></i>
+                            <span>Loading word cloud...</span>
+                        </div>
+                        <img id="historyWordCloud" class="history-vis-img" style="display: none;" alt="Word Cloud">
+                        <div id="historyWordCloudFallback" class="history-vis-fallback" style="display: none;">
+                            <i class="fas fa-cloud"></i>
+                            <span>Word cloud not available for this record</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- Comments -->
@@ -1189,43 +1747,55 @@
 </div>
 
 <!-- =============== NAVIGATION TABS =============== -->
-<div class="tab-navigation">
-    <button class="tab-button active" onclick="openTab('home')">
-        <i class="fas fa-home"></i> Home
+<div class="tab-navigation" role="navigation" aria-label="Main Floating Navigation">
+    <button class="tab-button active" onclick="openTab('home')" data-tab="home" title="Home">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
     </button>
 
-<div class="menu">
-  <div class="toggle">
-    <i class="fas fa-bars menu-icon"></i>
-  </div>
+    <button class="tab-button" onclick="openTab('compare')" data-tab="compare" title="Compare Videos">
+        <i class="fas fa-balance-scale"></i>
+        <span>Compare</span>
+    </button>
 
-<div class="list">
-<li style="--i:0" onclick="openTab('about')">
-    <i class="fas fa-user" style="color:#6366F1;"></i> 
-</li>
+    <div class="menu">
+        <div class="toggle" title="Quick Actions Menu" aria-label="Toggle Quick Menu">
+            <i class="fas fa-bars menu-icon"></i>
+        </div>
 
-<li style="--i:1" onclick="openTab('export')">
-    <i class="fas fa-download" style="color:#10B981;"></i> 
-</li>
+        <div class="list">
+            <li style="--i:0" onclick="openTab('about')" title="Account Profile">
+                <i class="fas fa-user" style="color:#6366F1;"></i> 
+            </li>
 
-<li style="--i:2">
-    <i class="fas fa-sun darklight-ModeToggle"
-       style="color:#F59E0B;"
-       onclick="toggleMode()"></i> 
-</li>
+            <li style="--i:1" onclick="openTab('export')" title="Export Analysis">
+                <i class="fas fa-download" style="color:#10B981;"></i> 
+            </li>
 
-<li style="--i:3" onclick="openTab('youtube')">
-    <i class="fab fa-youtube" style="color:#EF4444;"></i> 
-</li>
+            <li style="--i:2" title="Toggle Dark/Light Mode">
+                <i class="fas fa-sun darklight-ModeToggle"
+                   style="color:#F59E0B;"
+                   onclick="toggleMode()"></i> 
+            </li>
 
-<li style="--i:4" onclick="openTab('settings')">
-    <i class="fas fa-cog" style="color:#6B7280;"></i>
-</li>
-</div>
+            <li style="--i:3" onclick="openTab('youtube')" title="YouTube Shortcuts">
+                <i class="fab fa-youtube" style="color:#EF4444;"></i> 
+            </li>
 
-</div>
-     <button class="tab-button" onclick="openTab('history')">
-       <i class="fas fa-history"></i> History
+            <li style="--i:4" onclick="openTab('settings')" title="Settings">
+                <i class="fas fa-cog" style="color:#6B7280;"></i>
+            </li>
+        </div>
+    </div>
+
+    <button class="tab-button" onclick="openTab('dashboard')" data-tab="dashboard" title="Dashboard">
+        <i class="fas fa-chart-pie"></i>
+        <span>Dashboard</span>
+    </button>
+
+    <button class="tab-button" onclick="openTab('history')" data-tab="history" title="History">
+        <i class="fas fa-history"></i>
+        <span>History</span>
     </button>
 </div>
 
